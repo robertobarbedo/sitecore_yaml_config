@@ -1,1 +1,12 @@
-# sitecore_yaml_config
+# Sitecore YAML - MCP Server
+
+## Files
+### components.yaml
+Used to define all components and their caracteristics. 
+* Name: This is the display name of the components, the components name is used in code by removing all white spaces from its name. For instance, Rich Text becomes RichText.tsx.
+* Category: The component category is often used as a logical distiction among the components and to organize them in different folders.
+* Fields: Sitecore Fields available in the components. When there are no fields present, means the component doesn't need a data source.
+
+### pagetypes.yaml
+Page types YAML is used to define what pages can be created. They are mapped in Sitecore with templates. Each page type becomes a template.
+Also each page type will generate a container component organized under a folder called "Page Types Components". A container component is a component with only a Sitecore placeholder.
