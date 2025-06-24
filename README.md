@@ -7,7 +7,10 @@ Used to define all components and their caracteristics.
 * Category: The component category is often used as a logical distiction among the components and to organize them in different folders.
 * Fields: Sitecore Fields available in the components. When there are no fields present, means the component doesn't need a data source.
 
-The components files are organized in folders, for instance, a component with category "Page Structure" is localized in a folder "/components/page-structure".
+The components files are organized in folders, for instance, a component with Name "Title" and Category "Page Structure" is created in a folder "/components/page-structure/Title.tsx".
+
+All placeholder names should have no dashes. A component called "One Column Container" should use a placeholder key:
+ ``phKey = `container-${props?.params?.DynamicPlaceholderId}`; ``
 
 ### pagetypes.yaml
 Page types YAML is used to define what pages can be created. They are mapped in Sitecore with templates. Each page type becomes a template.
