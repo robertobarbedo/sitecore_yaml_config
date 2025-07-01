@@ -9,12 +9,12 @@ Used to define all components and their caracteristics.
 
 The components files are organized in folders, for instance, a component with Name "Title" and Category "Page Structure" is created in a folder "/components/page-structure/Title.tsx".
 
-All placeholder names should have no dashes. A component called "One Column Container" should use a placeholder key:
- ``phKey = `container-${props?.params?.DynamicPlaceholderId}`; ``
+All placeholder names should have dashes in the place of white spaces. A component called "One Column Container" should use a placeholder key:
+ ``phKey = `one-column-container-${props?.params?.DynamicPlaceholderId}`; ``
 
 ### pagetypes.yaml
 Page types YAML is used to define what pages can be created. They are mapped in Sitecore with templates. Each page type becomes a template.
-Also each page type will generate a container component organized under a folder called "Page Types Components". A container component is a component with only a Sitecore placeholder.
+Also each page type will generate a container component organized under a folder called "page-type-containers". A container component is a component with only a Sitecore placeholder.
 
 ### hierarchy.yaml
 Always use this file to determine when to add a <placeholder> in the component .tsx.
