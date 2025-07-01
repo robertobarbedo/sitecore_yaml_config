@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/your-org/sitecore-yaml-schemas/main/components-schema.json",
+  "title": "Sitecore Components Configuration",
+  "description": "JSON Schema for Sitecore components.yaml configuration file",
+  "type": "object",
+  "required": ["components"],
+  "properties": {
+    "components": {
+      "type": "array",
+      "description": "List of Sitecore components",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "category"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Component name",
+            "minLength": 1,
+            "examples": ["Card", "Rich Text Component", "Button"]
+          },
+          "category": {
+            "type": "string",
+            "description": "Component category",
+            "minLength": 1,
+            "examples": ["Page Structure", "Page Content", "Navigation"]
+          },
+          "variants": {
+            "type": "array",
+            "description": "Available component variants",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "examples": [["Default", "Header and No Image"]]
+          },
+          "fields": {
+            "type": "array",
+            "description": "Component fields",
+            "items": {
+              "type": "object",
+              "required": ["name", "type"],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Field name",
+                  "minLength": 1,
+                  "examples": ["Title", "Description", "Image", "Link"]
+                },
+                "type": {
+                  "type": "string",
+                  "description": "Field type from supported Sitecore field types",
+                  "enum": [
+                    "Single-Line Text",
+                    "Date",
+                    "DateTime", 
+                    "Checkbox",
+                    "File",
+                    "Image",
+                    "Integer",
+                    "Multi-Line Text",
+                    "Number",
+                    "Rich Text",
+                    "Checklist",
+                    "Droplist",
+                    "Multilist",
+                    "Treelist",
+                    "Taglist",
+                    "Multiroot Treelist",
+                    "Droplink",
+                    "General Link"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "renderingParameters": {
+            "type": "object",
+            "description": "Rendering parameters and their allowed values",
+            "patternProperties": {
+              "^[a-zA-Z0-9_-]+$": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+} 
