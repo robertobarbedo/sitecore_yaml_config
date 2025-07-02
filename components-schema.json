@@ -49,8 +49,8 @@
                   "type": "string",
                   "description": "Field name",
                   "minLength": 1,
-                  "pattern": "^[A-Z][a-z0-9]*( [A-Z][a-z0-9]*)*$",
-                  "examples": ["Title", "Description", "Image", "Link"]
+                  "pattern": "^[A-Z][a-z0-9]*([A-Z][a-z0-9]*)*$",
+                  "examples": ["Title", "Subtitle", "BackgroundImage", "PrimaryButton"]
                 },
                 "type": {
                   "type": "string",
