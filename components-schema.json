@@ -34,7 +34,7 @@
             "items": {
               "type": "string",
               "minLength": 1,
-              "pattern": "^[A-Z][a-z0-9]*( ([A-Z][a-z0-9]*|[a-z][a-z0-9]*))*$"
+              "pattern": "^[A-Z][a-z0-9]*([A-Z][a-z0-9]*)*$"
             },
             "examples": [["Default", "Header and No Image"]]
           },
