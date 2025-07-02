@@ -36,7 +36,7 @@
               "minLength": 1,
               "pattern": "^[A-Z][a-z0-9]*([A-Z][a-z0-9]*)*$"
             },
-            "examples": [["Default", "Header and No Image"]]
+            "examples": [["Default", "HeaderAndNoImage"]]
           },
           "fields": {
             "type": "array",
