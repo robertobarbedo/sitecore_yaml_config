@@ -18,8 +18,8 @@
             "type": "string",
             "description": "Component name",
             "minLength": 1,
-            "pattern": "^[A-Z][a-z0-9]*( [A-Z][a-z0-9]*)*$",
-            "examples": ["Card", "Rich Text Component", "Button"]
+            "pattern": "^[A-Z][a-zA-Z0-9]*( [A-Z][a-zA-Z0-9]*)*$",
+            "examples": ["Card", "Rich Text Component", "Button", "FAQ Accordion"]
           },
           "category": {
             "type": "string",
@@ -116,7 +116,7 @@
                         "type": "string",
                         "description": "Style display name",
                         "minLength": 1,
-                        "pattern": "^[A-Z][a-z0-9]*( [A-Z][a-z0-9]*)*$",
+                        "pattern": "^[A-Z][a-z0-9]*([A-Z][a-z0-9]*)*$",
                         "examples": ["Primary", "Secondary", "Success"]
                       },
                       "value": {
