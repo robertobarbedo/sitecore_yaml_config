@@ -8,7 +8,7 @@
   "properties": {
     "pagetypes": {
       "type": "array",
-      "description": "List of page type definitions",
+      "description": "List of page type (same as Sitecore Templates)",
       "minItems": 1,
       "items": {
         "type": "object",
@@ -16,14 +16,13 @@
         "properties": {
           "name": {
             "type": "string",
-            "description": "Page type name (free format)",
+            "description": "Page type name - (or Sitecore Template name) (free format)",
             "minLength": 1,
             "examples": ["Content Page", "Landing Page", "FAQ Page"]
           },
           "fields": {
             "type": "array",
-            "description": "Page type fields",
-            "minItems": 1,
+            "description": "Page type fields (or Sitecore Template Fields)",
             "items": {
               "type": "object",
               "required": ["name", "type"],
@@ -32,7 +31,8 @@
                   "type": "string",
                   "description": "Field name (free format)",
                   "minLength": 1,
-                  "examples": ["Heading", "Text", "BackgroundImage", "PrimaryButton"]
+                  "examples": ["Heading", "Text", "BackgroundImage", "PrimaryButton"],
+                  "pattern": "^[A-Z][a-zA-Z0-9]*([A-Z][a-zA-Z0-9]*)*$"
                 },
                 "type": {
                   "type": "string",
@@ -66,107 +66,104 @@
             "type": "array",
             "description": "Standard component layouts for this page type",
             "items": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "description": "Simple component reference",
-                  "minLength": 1,
-                  "examples": ["Full Width Section", "Card", "Hero Banner"]
-                },
-                {
+              "type": "object",
+              "description": "Component definition with placeholders",
+              "patternProperties": {
+                "^.*$": {
                   "type": "object",
-                  "description": "Complex component with nested structure",
+                  "description": "Component with placeholder definitions",
                   "patternProperties": {
-                    "^.*$": {
-                      "type": "object",
-                      "required": ["placeholder"],
-                      "properties": {
-                        "placeholder": {
-                          "type": "string",
-                          "description": "Placeholder name where component is placed",
-                          "minLength": 1,
-                          "examples": ["main", "left-column", "right-column", "sidebar"]
-                        },
-                        "components": {
-                          "type": "array",
-                          "description": "Nested components within this component",
-                          "items": {
-                            "anyOf": [
-                              {
-                                "type": "string",
-                                "description": "Simple component reference or variant",
-                                "minLength": 1,
-                                "examples": ["Default", "HeaderAndNoImage", "One Column"]
-                              },
-                              {
+                    "^[a-z][a-z0-9]*(-[a-z0-9]+)*$": {
+                      "type": "array",
+                      "description": "Placeholder content (lowercase placeholder names enforced)",
+                      "items": {
+                        "anyOf": [
+                          {
+                            "type": "string",
+                            "description": "Simple component reference",
+                            "minLength": 1,
+                            "examples": ["Full Width Container", "One Column", "Card"]
+                          },
+                          {
+                            "type": "object",
+                            "description": "Nested component with placeholders",
+                            "patternProperties": {
+                              "^.*$": {
                                 "type": "object",
-                                "description": "Component with nested structure",
+                                "description": "Nested component definition",
                                 "patternProperties": {
-                                  "^.*$": {
-                                    "type": "object",
-                                    "required": ["placeholder"],
-                                    "properties": {
-                                      "placeholder": {
-                                        "type": "string",
-                                        "description": "Placeholder name",
-                                        "minLength": 1,
-                                        "examples": ["left-column", "right-column", "content-area"]
-                                      },
-                                      "components": {
-                                        "type": "array",
-                                        "description": "Further nested components",
-                                        "items": {
-                                          "anyOf": [
-                                            {
-                                              "type": "string",
-                                              "description": "Component reference",
-                                              "minLength": 1,
-                                              "examples": ["One Column", "Two Columns", "Card"]
-                                            },
-                                            {
-                                              "type": "object",
-                                              "description": "Deeply nested component structure",
-                                              "patternProperties": {
-                                                "^.*$": {
-                                                  "type": "object",
-                                                  "required": ["placeholder"],
-                                                  "properties": {
-                                                    "placeholder": {
-                                                      "type": "string",
-                                                      "minLength": 1
-                                                    },
-                                                    "components": {
-                                                      "type": "array",
-                                                      "items": {
-                                                        "type": "string",
-                                                        "minLength": 1
-                                                      }
-                                                    }
-                                                  },
-                                                  "additionalProperties": false
-                                                }
-                                              },
-                                              "additionalProperties": false
-                                            }
-                                          ]
-                                        }
-                                      }
-                                    },
-                                    "additionalProperties": false
+                                  "^[a-z][a-z0-9]*(-[a-z0-9]+)*$": {
+                                    "type": "array",
+                                    "description": "Nested placeholder content",
+                                    "items": {
+                                      "anyOf": [
+                                        {
+                                          "type": "string",
+                                          "description": "Component reference",
+                                          "minLength": 1
+                                        },
+                                                                                 {
+                                           "type": "object",
+                                           "description": "Deeply nested component",
+                                           "patternProperties": {
+                                             "^.*$": {
+                                               "type": "object",
+                                               "patternProperties": {
+                                                 "^[a-z][a-z0-9]*(-[a-z0-9]+)*$": {
+                                                   "type": "array",
+                                                   "items": {
+                                                     "anyOf": [
+                                                       {
+                                                         "type": "string",
+                                                         "description": "Component reference",
+                                                         "minLength": 1
+                                                       },
+                                                       {
+                                                         "type": "object",
+                                                         "description": "Even deeper nested component",
+                                                         "patternProperties": {
+                                                           "^.*$": {
+                                                             "type": "object",
+                                                             "patternProperties": {
+                                                               "^[a-z][a-z0-9]*(-[a-z0-9]+)*$": {
+                                                                 "type": "array",
+                                                                 "items": {
+                                                                   "type": "string",
+                                                                   "minLength": 1
+                                                                 }
+                                                               }
+                                                             },
+                                                             "additionalProperties": false
+                                                           }
+                                                         },
+                                                         "additionalProperties": false
+                                                       }
+                                                     ]
+                                                   }
+                                                 }
+                                               },
+                                               "additionalProperties": false
+                                             }
+                                           },
+                                           "additionalProperties": false
+                                         }
+                                      ]
+                                    }
                                   }
                                 },
                                 "additionalProperties": false
                               }
-                            ]
+                            },
+                            "additionalProperties": false
                           }
-                        }
-                      },
-                      "additionalProperties": false
+                        ]
+                      }
                     }
                   },
                   "additionalProperties": false
                 }
-              ]
+              },
+              "additionalProperties": false
             }
           }
         },
@@ -175,4 +172,4 @@
     }
   },
   "additionalProperties": false
-} 
+}
