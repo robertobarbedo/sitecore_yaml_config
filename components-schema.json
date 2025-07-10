@@ -6,6 +6,238 @@
   "type": "object",
   "required": ["components"],
   "properties": {
+    "pagetypes": {
+      "type": "array",
+      "description": "List of page type definitions",
+      "items": {
+        "type": "object",
+        "required": ["name", "fields"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Page type name",
+            "minLength": 1,
+            "pattern": "^[A-Z][a-zA-Z0-9]*( [A-Z][a-zA-Z0-9]*)*$"
+          },
+          "fields": {
+            "type": "array",
+            "description": "Page type fields",
+            "items": {
+              "type": "object",
+              "required": ["name", "type"],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Field name",
+                  "minLength": 1,
+                  "pattern": "^[A-Z][a-zA-Z0-9]*([A-Z][a-zA-Z0-9]*)*$"
+                },
+                "type": {
+                  "type": "string",
+                  "description": "Field type from supported Sitecore field types",
+                  "enum": [
+                    "Single-Line Text",
+                    "Date",
+                    "DateTime", 
+                    "Checkbox",
+                    "File",
+                    "Image",
+                    "Integer",
+                    "Multi-Line Text",
+                    "Number",
+                    "Rich Text",
+                    "Checklist",
+                    "Droplist",
+                    "Multilist",
+                    "Treelist",
+                    "Taglist",
+                    "Multiroot Treelist",
+                    "Droplink",
+                    "General Link"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "standardvalues": {
+            "type": "array",
+            "description": "Standard component layouts for this page type",
+            "items": {
+              "type": "object",
+              "patternProperties": {
+                "^[A-Z][a-zA-Z0-9]*( [A-Z][a-zA-Z0-9]*)*$": {
+                  "type": "object",
+                  "required": ["placeholder"],
+                  "properties": {
+                    "placeholder": {
+                      "type": "string",
+                      "description": "Placeholder name where component is placed",
+                      "minLength": 1,
+                      "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
+                    },
+                    "components": {
+                      "type": "array",
+                      "description": "Nested components within this component",
+                      "items": {
+                        "anyOf": [
+                          {
+                            "type": "string",
+                            "description": "Simple component reference",
+                            "minLength": 1,
+                            "pattern": "^[A-Z][a-zA-Z0-9]*( [A-Z][a-zA-Z0-9]*)*$"
+                          },
+                          {
+                            "type": "object",
+                            "description": "Component with nested structure",
+                            "patternProperties": {
+                              "^[A-Z][a-zA-Z0-9]*( [A-Z][a-zA-Z0-9]*)*$": {
+                                "type": "object",
+                                "required": ["placeholder"],
+                                "properties": {
+                                  "placeholder": {
+                                    "type": "string",
+                                    "description": "Placeholder name",
+                                    "minLength": 1,
+                                    "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
+                                  },
+                                  "components": {
+                                    "type": "array",
+                                    "description": "Further nested components",
+                                    "items": {
+                                      "type": "string",
+                                      "minLength": 1,
+                                      "pattern": "^[A-Z][a-zA-Z0-9]*( [A-Z][a-zA-Z0-9]*)*$"
+                                    }
+                                  }
+                                },
+                                "additionalProperties": false
+                              }
+                            },
+                            "additionalProperties": false
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "standard": {
+      "type": "object",
+      "description": "Standard component definitions with nested component support",
+      "patternProperties": {
+        "^[A-Z][a-zA-Z0-9]*$": {
+          "type": "object",
+          "required": ["name", "category"],
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Component name",
+              "minLength": 1,
+              "pattern": "^[A-Z][a-zA-Z0-9]*( [A-Z][a-zA-Z0-9]*)*$"
+            },
+            "category": {
+              "type": "string",
+              "description": "Component category",
+              "minLength": 1,
+              "pattern": "^[A-Z][a-zA-Z0-9]*( [A-Z][a-zA-Z0-9]*)*$"
+            },
+            "nested_components": {
+              "type": "array",
+              "description": "Components that can be nested within this component",
+              "items": {
+                "type": "string",
+                "description": "Reference to another component name",
+                "minLength": 1,
+                "pattern": "^[A-Z][a-zA-Z0-9]*( [A-Z][a-zA-Z0-9]*)*$"
+              }
+            },
+            "placeholders": {
+              "type": "array",
+              "description": "Placeholder definitions for nested components",
+              "items": {
+                "type": "object",
+                "required": ["name", "allowed_components"],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Placeholder name",
+                    "minLength": 1,
+                    "pattern": "^[A-Z][a-zA-Z0-9]*$"
+                  },
+                  "allowed_components": {
+                    "type": "array",
+                    "description": "Components allowed in this placeholder",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "^[A-Z][a-zA-Z0-9]*( [A-Z][a-zA-Z0-9]*)*$"
+                    }
+                  },
+                  "max_items": {
+                    "type": "integer",
+                    "description": "Maximum number of components allowed",
+                    "minimum": 1
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "fields": {
+              "type": "array",
+              "description": "Component fields",
+              "items": {
+                "type": "object",
+                "required": ["name", "type"],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Field name",
+                    "minLength": 1,
+                    "pattern": "^[A-Z][a-zA-Z0-9]*([A-Z][a-zA-Z0-9]*)*$"
+                  },
+                  "type": {
+                    "type": "string",
+                    "description": "Field type from supported Sitecore field types",
+                    "enum": [
+                      "Single-Line Text",
+                      "Date",
+                      "DateTime", 
+                      "Checkbox",
+                      "File",
+                      "Image",
+                      "Integer",
+                      "Multi-Line Text",
+                      "Number",
+                      "Rich Text",
+                      "Checklist",
+                      "Droplist",
+                      "Multilist",
+                      "Treelist",
+                      "Taglist",
+                      "Multiroot Treelist",
+                      "Droplink",
+                      "General Link"
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
     "components": {
       "type": "array",
       "description": "List of Sitecore components",
