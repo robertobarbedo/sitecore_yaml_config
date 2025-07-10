@@ -29,7 +29,7 @@
               "properties": {
                 "name": {
                   "type": "string",
-                  "description": "Field name (free format)",
+                  "description": "Field name (Pascal Case format)",
                   "minLength": 1,
                   "examples": ["Heading", "Text", "BackgroundImage", "PrimaryButton"],
                   "pattern": "^[A-Z][a-zA-Z0-9]*([A-Z][a-zA-Z0-9]*)*$"
@@ -61,110 +61,6 @@
               },
               "additionalProperties": false
             }
-          },
-          "standardvalues": {
-            "type": "array",
-            "description": "Standard component layouts for this page type",
-            "items": {
-              "type": "object",
-              "description": "Component definition with placeholders",
-              "patternProperties": {
-                "^.*$": {
-                  "type": "object",
-                  "description": "Component with placeholder definitions",
-                  "patternProperties": {
-                    "^[a-z][a-z0-9]*(-[a-z0-9]+)*$": {
-                      "type": "array",
-                      "description": "Placeholder content (lowercase placeholder names enforced)",
-                      "items": {
-                        "anyOf": [
-                          {
-                            "type": "string",
-                            "description": "Simple component reference",
-                            "minLength": 1,
-                            "examples": ["Full Width Container", "One Column", "Card"]
-                          },
-                          {
-                            "type": "object",
-                            "description": "Nested component with placeholders",
-                            "patternProperties": {
-                              "^.*$": {
-                                "type": "object",
-                                "description": "Nested component definition",
-                                "patternProperties": {
-                                  "^[a-z][a-z0-9]*(-[a-z0-9]+)*$": {
-                                    "type": "array",
-                                    "description": "Nested placeholder content",
-                                    "items": {
-                                      "anyOf": [
-                                        {
-                                          "type": "string",
-                                          "description": "Component reference",
-                                          "minLength": 1
-                                        },
-                                                                                 {
-                                           "type": "object",
-                                           "description": "Deeply nested component",
-                                           "patternProperties": {
-                                             "^.*$": {
-                                               "type": "object",
-                                               "patternProperties": {
-                                                 "^[a-z][a-z0-9]*(-[a-z0-9]+)*$": {
-                                                   "type": "array",
-                                                   "items": {
-                                                     "anyOf": [
-                                                       {
-                                                         "type": "string",
-                                                         "description": "Component reference",
-                                                         "minLength": 1
-                                                       },
-                                                       {
-                                                         "type": "object",
-                                                         "description": "Even deeper nested component",
-                                                         "patternProperties": {
-                                                           "^.*$": {
-                                                             "type": "object",
-                                                             "patternProperties": {
-                                                               "^[a-z][a-z0-9]*(-[a-z0-9]+)*$": {
-                                                                 "type": "array",
-                                                                 "items": {
-                                                                   "type": "string",
-                                                                   "minLength": 1
-                                                                 }
-                                                               }
-                                                             },
-                                                             "additionalProperties": false
-                                                           }
-                                                         },
-                                                         "additionalProperties": false
-                                                       }
-                                                     ]
-                                                   }
-                                                 }
-                                               },
-                                               "additionalProperties": false
-                                             }
-                                           },
-                                           "additionalProperties": false
-                                         }
-                                      ]
-                                    }
-                                  }
-                                },
-                                "additionalProperties": false
-                              }
-                            },
-                            "additionalProperties": false
-                          }
-                        ]
-                      }
-                    }
-                  },
-                  "additionalProperties": false
-                }
-              },
-              "additionalProperties": false
-            }
           }
         },
         "additionalProperties": false
@@ -172,4 +68,4 @@
     }
   },
   "additionalProperties": false
-}
+} 
