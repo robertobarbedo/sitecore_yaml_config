@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "composition": {
+      "type": "object",
+      "properties": {
+        "groups": {
+          "type": "object",
+          "patternProperties": {
+            "^[a-z]+$": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-z][a-z ]*[a-z]$|^[a-z]$",
+                "description": "Component names should be lowercase (letters and spaces only, no leading/trailing spaces)"
+              }
+            }
+          },
+          "additionalProperties": false,
+          "description": "Groups with lowercase names containing arrays of lowercase component names"
+        },
+        "pages": {
+          "type": "object",
+          "patternProperties": {
+            ".*": {
+              "type": "object",
+              "patternProperties": {
+                "^[a-z]+$": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^[a-z]+$",
+                    "description": "Group names should be lowercase"
+                  }
+                }
+              },
+              "additionalProperties": false,
+              "description": "Page type with lowercase placeholder names (no whitespace) containing arrays of group names"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Page types (free text names) with lowercase placeholder names"
+        },
+        "components": {
+          "type": "object",
+          "patternProperties": {
+            ".*": {
+              "type": "object",
+              "patternProperties": {
+                "^[a-z-]+$": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^[a-z]+$",
+                    "description": "Group names should be lowercase"
+                  }
+                }
+              },
+              "additionalProperties": false,
+              "description": "Component with lowercase placeholder names (no whitespace, hyphens allowed) containing arrays of group names"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Components (free text names) with lowercase placeholder names"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Root composition object containing optional groups, pages, and components"
+    }
+  },
+  "required": ["composition"],
+  "additionalProperties": false,
+  "title": "Sitecore Composition Configuration Schema",
+  "description": "Schema for Sitecore composition configuration files defining groups, pages, and components with their placeholder relationships"
+} 
