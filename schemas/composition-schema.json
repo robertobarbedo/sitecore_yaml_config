@@ -7,59 +7,44 @@
       "properties": {
         "groups": {
           "type": "object",
-          "patternProperties": {
-            "^[a-z]+$": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "description": "Component names - can be any text/mixed case"
-              }
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Component names - can be any text/mixed case"
             }
           },
-          "additionalProperties": false,
-          "description": "Groups with lowercase names containing arrays of component names (mixed case allowed)"
+          "description": "Groups with any names containing arrays of component names"
         },
         "pages": {
           "type": "object",
-          "patternProperties": {
-            ".*": {
-              "type": "object",
-              "patternProperties": {
-                "^[a-z]+$": {
-                  "type": "array",
-                  "items": {
-                    "type": "string",
-                    "description": "Group names - can be any text/mixed case"
-                  }
-                }
-              },
-              "additionalProperties": false,
-              "description": "Page type with lowercase placeholder names (no whitespace) containing arrays of group names"
-            }
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "Group names - can be any text/mixed case"
+              }
+            },
+            "description": "Page type with any placeholder names containing arrays of group names"
           },
-          "additionalProperties": false,
-          "description": "Page types (free text names) with lowercase placeholder names"
+          "description": "Page types (free text names) with any placeholder names"
         },
         "components": {
           "type": "object",
-          "patternProperties": {
-            ".*": {
-              "type": "object",
-              "patternProperties": {
-                "^[a-z]+$": {
-                  "type": "array",
-                  "items": {
-                    "type": "string",
-                    "description": "Group names - can be any text/mixed case"
-                  }
-                }
-              },
-              "additionalProperties": false,
-              "description": "Component with lowercase placeholder names (no whitespace) containing arrays of group names"
-            }
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "Group names - can be any text/mixed case"
+              }
+            },
+            "description": "Component with any placeholder names containing arrays of group names"
           },
-          "additionalProperties": false,
-          "description": "Components (free text names) with lowercase placeholder names"
+          "description": "Components (free text names) with any placeholder names"
         }
       },
       "additionalProperties": false,

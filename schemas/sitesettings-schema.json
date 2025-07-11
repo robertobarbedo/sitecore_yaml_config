@@ -7,50 +7,50 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Site name - can be any text"
+          "description": "Site name "
         },
         "site_path": {
           "type": "string",
-          "description": "Site path - can be any text"
+          "description": "Site path "
         },
         "default_language": {
           "type": "string",
-          "description": "Default language - can be any text"
+          "description": "Default language "
         },
         "dictionary_path": {
           "type": "string",
-          "description": "Dictionary path - can be any text"
+          "description": "Dictionary path "
         },
         "site_template_path": {
           "type": "string",
-          "description": "Site template path - can be any text"
+          "description": "Site template path "
         },
         "datasource_template_path": {
           "type": "string",
-          "description": "Datasource template path - can be any text"
+          "description": "Datasource template path "
         },
         "rendering_path": {
           "type": "string",
-          "description": "Rendering path - can be any text"
+          "description": "Rendering path "
         },
         "placeholder_path": {
           "type": "string",
-          "description": "Placeholder path - can be any text"
+          "description": "Placeholder path "
         },
         "available_renderings_path": {
           "type": "string",
-          "description": "Available renderings path - can be any text"
+          "description": "Available renderings path "
         },
         "site_placeholder_path": {
           "type": "string",
-          "description": "Site placeholder path - can be any text"
+          "description": "Site placeholder path "
         },
         "defaults": {
           "type": "object",
           "properties": {
             "workflow": {
               "type": "string",
-              "description": "Workflow ID - can be any text"
+              "description": "Workflow ID "
             },
             "languagefallback": {
               "type": "boolean",
