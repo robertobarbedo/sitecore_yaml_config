@@ -12,8 +12,7 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "pattern": "^[a-z][a-z ]*[a-z]$|^[a-z]$",
-                "description": "Component names should be lowercase (letters and spaces only, no leading/trailing spaces)"
+                "description": "Component names"
               }
             }
           },
