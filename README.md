@@ -16,11 +16,11 @@ All placeholder names should have dashes in the place of white spaces. A compone
 Page types YAML is used to define what pages can be created. They are mapped in Sitecore with templates. Each page type becomes a template.
 Also each page type will generate a container component organized under a folder called "page-type-containers". A container component is a component with only a Sitecore placeholder.
 
-### hierarchy.yaml
+### composition.yaml
 Always use this file to determine when to add a <placeholder> in the component .tsx.
 All components that are present and have other components nested into them, must have a placeholder in the next.js .tsx compoent file
 Example
-hierarchy:
+composition:
   components:
     One Column: 
       main:
