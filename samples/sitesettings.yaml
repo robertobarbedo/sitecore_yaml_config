@@ -11,7 +11,8 @@ site:
   available_renderings_path: $(available_renderings_path)
   site_placeholder_path: $(site_placeholder_path)
   defaults:
-    workflow: $(workflow)
-    languagefallback: false
+    page_workflow: $(page_workflow)
+    datasource_workflow: $(datasource_workflow)
+    language_fallback: false
 
 

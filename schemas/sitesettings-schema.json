@@ -48,11 +48,15 @@
         "defaults": {
           "type": "object",
           "properties": {
-            "workflow": {
+            "page_workflow": {
               "type": "string",
-              "description": "Workflow ID "
+              "description": "Page workflow ID"
             },
-            "languagefallback": {
+            "datasource_workflow": {
+              "type": "string",
+              "description": "Datasource workflow ID"
+            },
+            "language_fallback": {
               "type": "boolean",
               "description": "Language fallback setting - boolean value"
             }
