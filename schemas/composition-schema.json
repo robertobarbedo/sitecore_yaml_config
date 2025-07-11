@@ -12,12 +12,12 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "description": "Component names"
+                "description": "Component names - can be any text/mixed case"
               }
             }
           },
           "additionalProperties": false,
-          "description": "Groups with lowercase names containing arrays of lowercase component names"
+          "description": "Groups with lowercase names containing arrays of component names (mixed case allowed)"
         },
         "pages": {
           "type": "object",
@@ -29,8 +29,7 @@
                   "type": "array",
                   "items": {
                     "type": "string",
-                    "pattern": "^[a-z]+$",
-                    "description": "Group names should be lowercase"
+                    "description": "Group names - can be any text/mixed case"
                   }
                 }
               },
@@ -47,17 +46,16 @@
             ".*": {
               "type": "object",
               "patternProperties": {
-                "^[a-z-]+$": {
+                "^[a-z]+$": {
                   "type": "array",
                   "items": {
                     "type": "string",
-                    "pattern": "^[a-z]+$",
-                    "description": "Group names should be lowercase"
+                    "description": "Group names - can be any text/mixed case"
                   }
                 }
               },
               "additionalProperties": false,
-              "description": "Component with lowercase placeholder names (no whitespace, hyphens allowed) containing arrays of group names"
+              "description": "Component with lowercase placeholder names (no whitespace) containing arrays of group names"
             }
           },
           "additionalProperties": false,
